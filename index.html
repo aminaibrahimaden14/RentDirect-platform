@@ -1,141 +1,723 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>my project</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RentDirect Kenya — No Broker Rental Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
     <div class="container">
-        <!--header-->
 
+        <!-- ==========================================================
+        NAVBAR
+        ========================================================== -->
         <header class="navbar">
-            <div class="logo">
-                <i>"fas fa-building"</i>
+            <div class="logo" onclick="showPage('home')">
+                <i class="fas fa-building"></i>
                 <span>RentDirect</span>
+                <span class="flag">🇰🇪</span>
+                <span class="badge">Kenya</span>
             </div>
-              <div class="nav-links">
-               <a href="#">Find space</a>
-               <a href="#">List property</a>
-               <a href="#">How it works</a>
-               <a href="#">Safety</a>
-         </div>
-         <div class="nav-actions">
-            <span class="btn-outline"><i class="fas fa-user"></i> Sign in</span>
-            <span class btn-primary><i class="fas fa-plus-circle"></i>List for free</span>
 
-         </div>
+            <nav class="nav-links">
+                <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a>
+                <a href="#" data-page="find-space"><i class="fas fa-search"></i> Find space</a>
+                <a href="#" data-page="list-property"><i class="fas fa-plus-circle"></i> List property</a>
+                <a href="#" data-page="how-it-works"><i class="fas fa-circle-info"></i> How it works</a>
+                <a href="#" data-page="safety"><i class="fas fa-shield-halved"></i> Safety</a>
+            </nav>
+
+            <div class="nav-actions">
+                <span class="btn btn-outline" onclick="openModal()"><i class="fas fa-user"></i> Sign in</span>
+                <span class="btn btn-primary" onclick="showPage('list-property')"><i class="fas fa-plus-circle"></i> List for free</span>
+            </div>
         </header>
 
-        <!----Hero-->
-        <section class="hero">
-       <div class="hero-text">
-        <div class="hero-badge"><i class="fas fa-field-alt"></i><em> No broker 100% direct</em></div>
-        <h1>Owner & renters <br><i>find each other insantly </i></h1>
-        <p>Stop paying hidden fees. No middlemen, no scams. Connect directly with verified building owner and genuine tenant</p>
-       </div>
-       <div class="trust-highlight">
-        <div class="trust-highlight-item"><i class="fas fa-handshake"></i> Direct chat <strong> no broker</strong></div>
-        <div class="trust-highlight-item"><i class="fas fa-check-circle"></i> <span>owner verified</span> <span class="note">.ID check</span></div>
-       <div class="trust-highlight-item"><i class="fas fa-coins"></i> <span>0% commission</span> <span class="note">• save thousands</span></div>
-       </div>
-    </div>
-     <div class="hero-image">
-      <div class="icon-building">
-        <i class="fas fa-city"></i>
-      </div>
-      <p><strong>1,200+</strong> buildings listed</p>
-      <p class="sub">directly by owners . no brokers</p>
-      <div class="mini-badge"><i class="fas fa-user-check"></i> 340+ renters this week</div>
-     </div>
-        </section>
-     <!-- ===== TRUST BAR ===== -->
-      
-  <div class="trust-bar">
-    <div class="trust-item"><i class="fas fa-store"></i> <strong>1200+</strong> properties</div>
-    <div class="trust-item"><i class="fas fa-user-tie"></i> <strong>870+</strong> verified owners</div>
-    <div class="trust-item"><i class="fas fa-user-friends"></i> <strong>2.4k</strong> happy renters</div>
-    <div class="trust-item"><i class="fas fa-star"></i> <strong>4.9★</strong> average rating</div>
-  </div>
+        <!-- ==========================================================
+        SIGN IN MODAL
+        ========================================================== -->
+        <div id="signinModal" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <h2><i class="fas fa-user-circle"></i> Welcome back</h2>
+                <p class="subtitle">Sign in to your RentDirect Kenya account</p>
+                <form onsubmit="handleSignIn(event)">
+                    <div class="form-group">
+                        <label>Email address</label>
+                        <input type="email" placeholder="you@example.com" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="••••••••" required />
+                    </div>
+                    <div class="modal-options">
+                        <label><input type="checkbox" /> Remember me</label>
+                        <a href="#">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-sign-in-alt"></i> Sign in
+                    </button>
+                </form>
+                <div class="modal-divider">or continue with</div>
+                <div class="modal-social">
+                    <span class="btn"><i class="fab fa-google"></i> Google</span>
+                    <span class="btn"><i class="fab fa-github"></i> GitHub</span>
+                    <span class="btn"><i class="fab fa-apple"></i> Apple</span>
+                </div>
+                <p style="text-align:center; margin-top:18px; font-size:13px; color:var(--gray-500);">
+                    Don't have an account? <a href="#" style="color:var(--primary); font-weight:600;">Sign up</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- ==========================================================
+        PAGE: HOME
+        ========================================================== -->
+        <div id="page-home" class="page active">
+
+            <!-- HERO -->
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-circle-check"></i> No broker · 100% direct
+                    </div>
+                    <div class="hero-flag-stripes">
+                        <span class="black"></span>
+                        <span class="red"></span>
+                        <span class="green"></span>
+                    </div>
+                    <h1>
+                        Owners & renters <br />
+                        <span class="highlight">find each other instantly</span>
+                    </h1>
+                    <p class="subtitle">
+                        Stop paying hidden fees. No middlemen, no scams. Connect directly with
+                        verified building owners and genuine tenants across Kenya.
+                    </p>
+                    <div class="hero-trust">
+                        <span class="hero-trust-item">
+                            <i class="fas fa-handshake"></i> Direct chat <strong>no broker</strong>
+                        </span>
+                        <span class="hero-trust-item">
+                            <i class="fas fa-check-circle"></i> Owner verified <span class="note">· ID check</span>
+                        </span>
+                        <span class="hero-trust-item">
+                            <i class="fas fa-coins"></i> 0% commission <span class="note">· save thousands</span>
+                        </span>
+                        <span class="hero-trust-item">
+                            <span class="kenya-flag-dot"></span> Kenya <span class="note">· nationwide</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <i class="fas fa-city big-icon"></i>
+                    <div class="number">1,200+</div>
+                    <div class="label">buildings listed directly by owners</div>
+                    <div class="mini-badge">
+                        <i class="fas fa-user-check"></i> 340+ renters this week
+                    </div>
+                </div>
+            </section>
+
+            <!-- TRUST BAR -->
+            <div class="trust-bar">
+                <div class="trust-item">
+                    <i class="fas fa-store"></i>
+                    <strong>1,200+</strong> properties
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-user-tie"></i>
+                    <strong>870+</strong> verified owners
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-user-friends"></i>
+                    <strong>2.4k</strong> happy renters
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-star"></i>
+                    <strong>4.9★</strong> average rating
+                </div>
+            </div>
+
+            <!-- STATS COUNTER -->
+            <div class="stats-counter">
+                <div class="stat-item">
+                    <div class="number">1,200+</div>
+                    <div class="label">Properties Listed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">870+</div>
+                    <div class="label">Verified Owners</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">2.4k</div>
+                    <div class="label">Happy Renters</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">4.9★</div>
+                    <div class="label">Average Rating</div>
+                </div>
+            </div>
+
+            <!-- PANELS -->
+            <div class="section-header">
+                <h2><i class="fas fa-people-group"></i> Choose your role</h2>
+                <span class="line"></span>
+                <span class="subtitle">Pick the path that fits you</span>
+            </div>
+
+            <div class="panels-grid">
+                <div class="panel">
+                    <div class="icon-wrap"><i class="fas fa-building"></i></div>
+                    <h3>I own a building</h3>
+                    <p>List your space in 2 minutes. Get direct messages from serious renters. No broker fees, no hidden costs.</p>
+                    <div class="panel-footer">
+                        <span class="btn btn-primary" onclick="showPage('list-property')"><i class="fas fa-upload"></i> List your property</span>
+                        <span class="tag"><i class="fas fa-check"></i> free</span>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="icon-wrap"><i class="fas fa-user"></i></div>
+                    <h3>I need a place</h3>
+                    <p>Search thousands of direct listings. Contact owners directly. No brokers, no commission, no fake listings.</p>
+                    <div class="panel-footer">
+                        <span class="btn btn-primary-outline" onclick="showPage('find-space')"><i class="fas fa-search"></i> Search spaces</span>
+                        <span class="tag"><i class="fas fa-shield"></i> secure</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FEATURES -->
+            <div class="section-header">
+                <h2><i class="fas fa-shield-halved"></i> Why RentDirect Kenya cuts out brokers</h2>
+                <span class="line"></span>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="icon"><i class="fas fa-hand-holding-dollar"></i></span>
+                    <h4>Zero commission</h4>
+                    <p>Brokers often take 10–15% of yearly rent. We charge nothing — owners and renters keep 100%.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon"><i class="fas fa-user-check"></i></span>
+                    <h4>Verified identities</h4>
+                    <p>Every owner & renter is ID-verified. No more anonymous brokers who disappear with deposits.</p>
+                    <span class="badge"><i class="fas fa-check"></i> trust</span>
+                </div>
+                <div class="feature-card">
+                    <span class="icon"><i class="fas fa-message"></i></span>
+                    <h4>Direct communication</h4>
+                    <p>Chat directly with the owner. No middleman filtering or misrepresenting the property.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon"><i class="fas fa-file-signature"></i></span>
+                    <h4>Smart contract</h4>
+                    <p>Rental agreements are generated transparently. Owners and renters sign directly — no broker.</p>
+                </div>
+            </div>
+
+            <!-- TESTIMONIAL -->
+            <div class="testimonial">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <blockquote>
+                    “I almost got scammed by a broker who asked for a deposit before showing the flat.
+                    Then I found RentDirect Kenya — contacted the owner directly and signed the lease in 2 days.
+                    No fees, no stress.”
+                </blockquote>
+                <div class="author">
+                    Maria K. <span>— renter in Nairobi</span>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <!-- CTA BANNER -->
+            <div class="cta-banner">
+                <div class="left">
+                    <i class="fas fa-circle-exclamation"></i>
+                    <span>Stop paying broker fees. <span class="light">Join the direct rental revolution in Kenya.</span></span>
+                </div>
+                <span class="btn" onclick="showPage('list-property')"><i class="fas fa-arrow-right"></i> Get started</span>
+            </div>
+
+        </div>
+
+        <!-- ==========================================================
+        PAGE: FIND SPACE
+        ========================================================== -->
+        <div id="page-find-space" class="page">
+
+            <div class="page-title">
+                <h1><i class="fas fa-search"></i> Find your perfect space in Kenya</h1>
+                <p>Search thousands of direct listings from verified owners across Nairobi, Mombasa, Kisumu, and beyond.</p>
+            </div>
+
+            <!-- Search Filters -->
+            <div class="search-filters">
+                <input type="text" placeholder="📍 Location (city, estate)" />
+                <select>
+                    <option>Property type</option>
+                    <option>Apartment</option>
+                    <option>House</option>
+                    <option>Studio</option>
+                    <option>Room</option>
+                    <option>Bedsitter</option>
+                    <option>Mansion</option>
+                </select>
+                <select>
+                    <option>Max price (KES)</option>
+                    <option>10,000</option>
+                    <option>20,000</option>
+                    <option>30,000</option>
+                    <option>50,000</option>
+                    <option>100,000</option>
+                </select>
+                <select>
+                    <option>Bedrooms</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4+</option>
+                </select>
+                <span class="btn"><i class="fas fa-search"></i> Search</span>
+            </div>
+
+            <!-- Property Grid -->
+            <div class="property-grid">
+
+                <div class="property-card">
+                    <div class="image">
+                        <i class="fas fa-building"></i>
+                        <span class="tag"><i class="fas fa-star"></i> Featured</span>
+                    </div>
+                    <div class="info">
+                        <div class="price"><span class="kes">KES</span> 35,000 <span>/ month</span></div>
+                        <h4>Modern 2BR Apartment</h4>
+                        <div class="location"><i class="fas fa-location-dot"></i> Westlands, Nairobi</div>
+                        <div class="tags">
+                            <span>2 beds</span>
+                            <span>1 bath</span>
+                            <span class="verified"><i class="fas fa-check-circle"></i> Verified owner</span>
+                        </div>
+                        <span class="btn"><i class="fas fa-message"></i> Contact owner</span>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="image">
+                        <i class="fas fa-house"></i>
+                        <span class="tag hot"><i class="fas fa-fire"></i> Hot</span>
+                    </div>
+                    <div class="info">
+                        <div class="price"><span class="kes">KES</span> 25,000 <span>/ month</span></div>
+                        <h4>Cozy Studio with Garden</h4>
+                        <div class="location"><i class="fas fa-location-dot"></i> Kilimani, Nairobi</div>
+                        <div class="tags">
+                            <span>Studio</span>
+                            <span>1 bath</span>
+                            <span class="verified"><i class="fas fa-check-circle"></i> Verified owner</span>
+                        </div>
+                        <span class="btn"><i class="fas fa-message"></i> Contact owner</span>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="image">
+                        <i class="fas fa-building"></i>
+                        <span class="tag"><i class="fas fa-star"></i> Featured</span>
+                    </div>
+                    <div class="info">
+                        <div class="price"><span class="kes">KES</span> 120,000 <span>/ month</span></div>
+                        <h4>Luxury 3BR Penthouse</h4>
+                        <div class="location"><i class="fas fa-location-dot"></i> Nyali, Mombasa</div>
+                        <div class="tags">
+                            <span>3 beds</span>
+                            <span>2 baths</span>
+                            <span class="verified"><i class="fas fa-check-circle"></i> Verified owner</span>
+                        </div>
+                        <span class="btn"><i class="fas fa-message"></i> Contact owner</span>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="image"><i class="fas fa-house"></i></div>
+                    <div class="info">
+                        <div class="price"><span class="kes">KES</span> 45,000 <span>/ month</span></div>
+                        <h4>Family Home with Garden</h4>
+                        <div class="location"><i class="fas fa-location-dot"></i> Milimani, Kisumu</div>
+                        <div class="tags">
+                            <span>3 beds</span>
+                            <span>2 baths</span>
+                            <span class="verified"><i class="fas fa-check-circle"></i> Verified owner</span>
+                        </div>
+                        <span class="btn"><i class="fas fa-message"></i> Contact owner</span>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="image"><i class="fas fa-building"></i></div>
+                    <div class="info">
+                        <div class="price"><span class="kes">KES</span> 28,000 <span>/ month</span></div>
+                        <h4>Bright 1BR with Balcony</h4>
+                        <div class="location"><i class="fas fa-location-dot"></i> Kileleshwa, Nairobi</div>
+                        <div class="tags">
+                            <span>1 bed</span>
+                            <span>1 bath</span>
+                            <span class="verified"><i class="fas fa-check-circle"></i> Verified owner</span>
+                        </div>
+                        <span class="btn"><i class="fas fa-message"></i> Contact owner</span>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="image"><i class="fas fa-building"></i></div>
+                    <div class="info">
+                        <div class="price"><span class="kes">KES</span> 55,000 <span>/ month</span></div>
+                        <h4>Designer 2BR Loft</h4>
+                        <div class="location"><i class="fas fa-location-dot"></i> Riverside, Nairobi</div>
+                        <div class="tags">
+                            <span>2 beds</span>
+                            <span>2 baths</span>
+                            <span class="verified"><i class="fas fa-check-circle"></i> Verified owner</span>
+                        </div>
+                        <span class="btn"><i class="fas fa-message"></i> Contact owner</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ==========================================================
+        PAGE: LIST PROPERTY
+        ========================================================== -->
+        <div id="page-list-property" class="page">
+
+            <div class="page-title">
+                <h1><i class="fas fa-plus-circle"></i> List your property in Kenya</h1>
+                <p>List your space in 2 minutes — completely free. No broker fees, no hidden costs.</p>
+            </div>
+
+            <form class="listing-form" onsubmit="return false;">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Property title <span class="required">*</span></label>
+                        <input type="text" placeholder="e.g. Modern 2BR Apartment in Westlands" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Property type <span class="required">*</span></label>
+                        <select required>
+                            <option value="">Select type</option>
+                            <option>Apartment</option>
+                            <option>House</option>
+                            <option>Studio</option>
+                            <option>Room</option>
+                            <option>Bedsitter</option>
+                            <option>Mansion</option>
+                            <option>Commercial</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Location (City, Estate) <span class="required">*</span></label>
+                        <input type="text" placeholder="e.g. Westlands, Nairobi" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Monthly rent (KES) <span class="required">*</span></label>
+                        <input type="text" placeholder="35,000" required />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Bedrooms</label>
+                        <select>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Bathrooms</label>
+                        <select>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Description <span class="required">*</span></label>
+                    <textarea placeholder="Describe your property. Include amenities, size, features, nearby attractions..." required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Availability date</label>
+                        <input type="date" />
+                    </div>
+                    <div class="form-group">
+                        <label>Property size (m²)</label>
+                        <input type="text" placeholder="e.g. 85" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload photos</label>
+                    <input type="file" multiple accept="image/*" />
+                    <div class="form-hint">Upload up to 10 photos of your property</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> List your property — Free</button>
+                <div class="form-hint" style="text-align:center; margin-top:12px;">
+                    <i class="fas fa-check-circle" style="color:var(--green);"></i> No commission · No hidden fees · 100% free
+                </div>
+            </form>
+
+        </div>
+
+        <!-- ==========================================================
+        PAGE: HOW IT WORKS
+        ========================================================== -->
+        <div id="page-how-it-works" class="page">
+
+            <div class="page-title">
+                <h1><i class="fas fa-circle-info"></i> How it works in Kenya</h1>
+                <p>Three simple steps to rent or list a property — with zero broker fees.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <span class="step-number">1</span>
+                    <span class="icon"><i class="fas fa-user-plus"></i></span>
+                    <h4>Create your account</h4>
+                    <p>Sign up in 30 seconds. Verify your identity to build trust with owners and renters across Kenya.</p>
+                </div>
+
+                <div class="step-card">
+                    <span class="step-number">2</span>
+                    <span class="icon"><i class="fas fa-search"></i></span>
+                    <h4>Find or list a property</h4>
+                    <p>Search thousands of direct listings or list your own space — completely free, anywhere in Kenya.</p>
+                </div>
+
+                <div class="step-card">
+                    <span class="step-number">3</span>
+                    <span class="icon"><i class="fas fa-handshake"></i></span>
+                    <h4>Connect directly</h4>
+                    <p>Chat with the owner or renter directly. No middlemen, no commission, no scams. Karibu!</p>
+                </div>
+            </div>
+
+            <div style="background:var(--white); border-radius:var(--radius); padding:24px 28px; margin-bottom:30px; box-shadow:var(--shadow-sm); border:1px solid rgba(0,0,0,0.04); text-align:center;">
+                <h3 style="margin-bottom:6px;">Ready to get started in Kenya?</h3>
+                <p style="color:var(--gray-500); margin-bottom:14px;">Join thousands of happy renters and owners who cut out the middleman.</p>
+                <span class="btn btn-primary" onclick="showPage('list-property')"><i class="fas fa-plus-circle"></i> List your property for free</span>
+                <span class="btn btn-primary-outline" onclick="showPage('find-space')" style="margin-left:10px;"><i class="fas fa-search"></i> Find a space</span>
+            </div>
+
+        </div>
+
+        <!-- ==========================================================
+        PAGE: SAFETY
+        ========================================================== -->
+        <div id="page-safety" class="page">
+
+            <div class="page-title">
+                <h1><i class="fas fa-shield-halved"></i> Safety & Trust in Kenya</h1>
+                <p>Your safety is our priority. Every user is verified and every transaction is protected.</p>
+            </div>
+
+            <div class="safety-grid">
+                <div class="safety-card">
+                    <div class="icon blue"><i class="fas fa-id-card"></i></div>
+                    <div>
+                        <h4>Identity verification</h4>
+                        <p>Every owner and renter must verify their ID. No more anonymous brokers or fake accounts.</p>
+                    </div>
+                </div>
+
+                <div class="safety-card">
+                    <div class="icon green"><i class="fas fa-shield"></i></div>
+                    <div>
+                        <h4>Secure communication</h4>
+                        <p>All messages are encrypted and monitored for suspicious activity. Stay safe while chatting.</p>
+                    </div>
+                </div>
+
+                <div class="safety-card">
+                    <div class="icon purple"><i class="fas fa-file-signature"></i></div>
+                    <div>
+                        <h4>Smart contracts</h4>
+                        <p>Rental agreements are generated transparently. Both parties sign directly — no hidden clauses.</p>
+                    </div>
+                </div>
+
+                <div class="safety-card">
+                    <div class="icon red"><i class="fas fa-ban"></i></div>
+                    <div>
+                        <h4>Report & block</h4>
+                        <p>Report suspicious users or listings. Our team reviews and takes action within 24 hours.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="safety-tips">
+                <h3><i class="fas fa-lightbulb"></i> Safety tips for renters & owners in Kenya</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Always meet in person before sending money</li>
+                    <li><i class="fas fa-check-circle"></i> Never share your bank details or passwords</li>
+                    <li><i class="fas fa-check-circle"></i> Verify the property exists before paying</li>
+                    <li><i class="fas fa-check-circle"></i> Use the platform's messaging system</li>
+                    <li><i class="fas fa-check-circle"></i> Read the contract carefully before signing</li>
+                    <li><i class="fas fa-check-circle"></i> Report any suspicious activity immediately</li>
+                </ul>
+            </div>
+
+            <div style="background:var(--primary-light); border-radius:var(--radius); padding:20px 24px; margin-bottom:30px; border-left:5px solid var(--primary);">
+                <p style="font-weight:600; color:var(--dark); font-size:14px;">
+                    <i class="fas fa-shield" style="color:var(--primary);"></i> 
+                    RentDirect Kenya is 100% broker-free. We don't charge fees, we don't handle payments, and we never share your data.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ==========================================================
+        FOOTER
+        ========================================================== -->
+        <footer class="footer">
+            <div class="copy">
+                <i class="fas fa-building"></i> RentDirect Kenya · 2026 · no brokers
+                <span class="kenya-flag"></span>
+            </div>
+            <div class="footer-links">
+                <a href="#" onclick="showPage('home')">Home</a>
+                <a href="#" onclick="showPage('safety')">Safety</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+                <a href="#" onclick="showPage('safety')"><i class="fas fa-shield"></i> Trust</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </footer>
 
     </div>
-     <!-- ===== TWO PANELS ===== -->
-  <div class="two-panel">
-    <div class="panel">
-      <div class="icon-circle"><i class="fas fa-building"></i></div>
-      <h3>I own a building</h3>
-      <p>List your space in 2 minutes. Get direct messages from serious renters. No broker fees, no hidden costs.</p>
-      <span class="btn-panel filled"><i class="fas fa-upload"></i> List your property</span>
-      <span class="meta-tag"><i class="fas fa-check"></i> free</span>
-    </div>
-    <div class="panel">
-      <div class="icon-circle"><i class="fas fa-user"></i></div>
-      <h3>I need a place</h3>
-      <p>Search thousands of direct listings. Contact owners directly. No brokers, no commission, no fake listings.</p>
-      <span class="btn-panel"><i class="fas fa-search"></i> Search spaces</span>
-      <span class="meta-tag"><i class="fas fa-shield"></i> secure</span>
-    </div>
-  </div>
-  
 
-   <!-- ===== FEATURE GRID ===== -->
-    
-  <div class="section-title">
-    <i class="fas fa-shield-halved"></i> Why RentDirect cuts out brokers
-  </div>
-  <div class="feature-grid">
-    <div class="feature-card">
-      <i class="fas fa-hand-holding-dollar"></i>
-      <h4>Zero commission</h4>
-      <p>Brokers often take 10-15% of yearly rent. We charge nothing — owners and renters keep 100%.</p>
-    </div>
-<div class="feature-card">
-      <i class="fas fa-user-check"></i>
-      <h4>Verified identities</h4>
-      <p>Every owner & renter is ID-verified. No more anonymous brokers who disappear with deposits.</p>
-      <span class="safe-tag"><i class="fas fa-check"></i> trust</span>
-    </div>
-    <div class="feature-card">
-      <i class="fas fa-message"></i>
-      <h4>Direct communication</h4>
-      <p>Chat directly with the owner. No middleman filtering or misrepresenting the property.</p>
-    </div>
-      <div class="feature-card">
-      <i class="fas fa-file-signature"></i>
-      <h4>Smart contract</h4>
-      <p>Rental agreements are generated transparently. Owners and renters sign directly — no broker.</p>
-    </div>
-  </div>
-  
- <!-- ===== TESTIMONIAL ===== -->
-  
-  <div class="testimonial">
-    <i class="fas fa-quote-left quote"></i>
-    <p>“I almost got scammed by a broker who asked for a deposit before showing the flat. Then I found RentDirect — contacted the owner directly and signed the lease in 2 days. No fees, no stress.”</p>
-    <div class="author">— Maria K., renter in Berlin</div>
-  </div>
-  <!-- ===== CTA BANNER ===== -->
-  <div class="cta-banner">
-    <div class="left">
-      <i class="fas fa-circle-exclamation"></i>
-      <span>Stop paying broker fees. <span class="light">Join the direct rental revolution.</span></span>
-    </div>
-    <span class="btn-primary solid-dark"><i class="fas fa-arrow-right"></i> Get started</span>
-  </div> 
-                      <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="copy">
-      <i class="fas fa-building" style="color: #2a7de1;"></i> RentDirect · 2026 · no brokers
-    </div>
-    <div class="footer-links">
-      <a href="#">About</a>
-      <a href="#">Safety</a>
-      <a href="#">Blog</a>
-      <a href="#">Contact</a>
-      <a href="#"><i class="fas fa-shield"></i> Trust</a>
-    </div>
-  </footer>
-</div>
+    <!-- ==========================================================
+    JAVASCRIPT
+    ========================================================== -->
+    <script>
+        // ============================================================
+        // PAGE NAVIGATION
+        // ============================================================
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(function(p) {
+                p.classList.remove('active');
+            });
+
+            var targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            document.querySelectorAll('.nav-links a').forEach(function(link) {
+                link.classList.remove('active');
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================================
+        // SIGN IN MODAL
+        // ============================================================
+
+        function openModal() {
+            var modal = document.getElementById('signinModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('signinModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function handleSignIn(event) {
+            event.preventDefault();
+            alert('✅ Sign in successful! Welcome back to RentDirect Kenya.');
+            closeModal();
+        }
+
+        // ============================================================
+        // CLOSE MODAL ON CLICK OUTSIDE
+        // ============================================================
+
+        document.getElementById('signinModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // ============================================================
+        // CLOSE MODAL WITH ESCAPE KEY
+        // ============================================================
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                var modal = document.getElementById('signinModal');
+                if (modal.classList.contains('active')) {
+                    closeModal();
+                }
+            }
+        });
+
+        // ============================================================
+        // NAV LINK CLICK HANDLERS
+        // ============================================================
+
+        document.querySelectorAll('.nav-links a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                var page = this.dataset.page;
+                if (page) {
+                    showPage(page);
+                }
+            });
+        });
+
+        // ============================================================
+        // LOGO CLICK
+        // ============================================================
+
+        document.querySelector('.logo').addEventListener('click', function() {
+            showPage('home');
+        });
+    </script>
+
 </body>
 </html>
