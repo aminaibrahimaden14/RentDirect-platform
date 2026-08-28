@@ -3,11 +3,31 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RentDirect Kenya — No Broker Rental Platform</title>
+    <title>RentDirect — No Broker Rental Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+    <!-- ==========================================================
+    HIDDEN RADIO INPUTS FOR PAGE NAVIGATION
+    ========================================================== -->
+    <input type="radio" name="page" id="page-home" class="page-radio" checked />
+    <input type="radio" name="page" id="page-find-space" class="page-radio" />
+    <input type="radio" name="page" id="page-list-property" class="page-radio" />
+    <input type="radio" name="page" id="page-how-it-works" class="page-radio" />
+    <input type="radio" name="page" id="page-safety" class="page-radio" />
+
+    <!-- ==========================================================
+    HIDDEN RADIO INPUT FOR SIGN IN MODAL
+    ========================================================== -->
+    <input type="radio" name="modal" id="modal-open" class="modal-radio" />
+    <input type="radio" name="modal" id="modal-close" class="modal-radio" checked />
+
+    <!-- ==========================================================
+    SCROLL TO TOP ANCHOR
+    ========================================================== -->
+    <div id="top"></div>
 
     <div class="container">
 
@@ -15,39 +35,37 @@
         NAVBAR
         ========================================================== -->
         <header class="navbar">
-            <div class="logo" onclick="showPage('home')">
-                <i class="fas fa-building"></i>
-                <span>RentDirect</span>
-                <span class="flag">🇰🇪</span>
-                <span class="badge">Kenya</span>
-            </div>
+            <label for="page-home" class="logo">
+                <span class="logo-icon"><i class="fas fa-building"></i></span>
+                <span class="logo-text">RentDirect</span>
+            </label>
 
             <nav class="nav-links">
-                <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a>
-                <a href="#" data-page="find-space"><i class="fas fa-search"></i> Find space</a>
-                <a href="#" data-page="list-property"><i class="fas fa-plus-circle"></i> List property</a>
-                <a href="#" data-page="how-it-works"><i class="fas fa-circle-info"></i> How it works</a>
-                <a href="#" data-page="safety"><i class="fas fa-shield-halved"></i> Safety</a>
+                <label for="page-home" class="nav-link active"><i class="fas fa-home"></i> Home</label>
+                <label for="page-find-space" class="nav-link"><i class="fas fa-search"></i> Find space</label>
+                <label for="page-list-property" class="nav-link"><i class="fas fa-plus-circle"></i> List property</label>
+                <label for="page-how-it-works" class="nav-link"><i class="fas fa-circle-info"></i> How it works</label>
+                <label for="page-safety" class="nav-link"><i class="fas fa-shield-halved"></i> Safety</label>
             </nav>
 
             <div class="nav-actions">
-                <span class="btn btn-outline" onclick="openModal()"><i class="fas fa-user"></i> Sign in</span>
-                <span class="btn btn-primary" onclick="showPage('list-property')"><i class="fas fa-plus-circle"></i> List for free</span>
+                <label for="modal-open" class="btn btn-outline"><i class="fas fa-user"></i> Sign in</label>
+                <label for="page-list-property" class="btn btn-primary"><i class="fas fa-plus-circle"></i> List for free</label>
             </div>
         </header>
 
         <!-- ==========================================================
         SIGN IN MODAL
         ========================================================== -->
-        <div id="signinModal" class="modal">
-            <div class="modal-content">
-                <button class="modal-close" onclick="closeModal()">&times;</button>
+        <div class="modal-overlay">
+            <div class="modal">
+                <label for="modal-close" class="modal-close">&times;</label>
                 <h2><i class="fas fa-user-circle"></i> Welcome back</h2>
-                <p class="subtitle">Sign in to your RentDirect Kenya account</p>
-                <form onsubmit="handleSignIn(event)">
+                <p class="subtitle">Sign in to your RentDirect account</p>
+                <form>
                     <div class="form-group">
                         <label>Email address</label>
-                        <input type="email" placeholder="you@example.com" required />
+                        <input type="email" placeholder="your@example.com" required />
                     </div>
                     <div class="form-group">
                         <label>Password</label>
@@ -65,10 +83,13 @@
                 <div class="modal-social">
                     <span class="btn"><i class="fab fa-google"></i> Google</span>
                     <span class="btn"><i class="fab fa-github"></i> GitHub</span>
-                    <span class="btn"><i class="fab fa-apple"></i> Apple</span>
+                    <span class="btn"><i class="fab fa-facebook"></i> Facebook</span>
+                    <span class="btn"><i class="fab fa-twitter"></i> Twitter</span>
+        
+                    
                 </div>
-                <p style="text-align:center; margin-top:18px; font-size:13px; color:var(--gray-500);">
-                    Don't have an account? <a href="#" style="color:var(--primary); font-weight:600;">Sign up</a>
+                <p class="modal-footer-text">
+                    Don't have an account? <a href="#">Sign up</a>
                 </p>
             </div>
         </div>
@@ -83,11 +104,6 @@
                 <div class="hero-content">
                     <div class="hero-badge">
                         <i class="fas fa-circle-check"></i> No broker · 100% direct
-                    </div>
-                    <div class="hero-flag-stripes">
-                        <span class="black"></span>
-                        <span class="red"></span>
-                        <span class="green"></span>
                     </div>
                     <h1>
                         Owners & renters <br />
@@ -135,7 +151,7 @@
                 </div>
                 <div class="trust-item">
                     <i class="fas fa-user-friends"></i>
-                    <strong>2.4k</strong> happy renters
+                    <strong>1.4k</strong> happy renters
                 </div>
                 <div class="trust-item">
                     <i class="fas fa-star"></i>
@@ -176,7 +192,7 @@
                     <h3>I own a building</h3>
                     <p>List your space in 2 minutes. Get direct messages from serious renters. No broker fees, no hidden costs.</p>
                     <div class="panel-footer">
-                        <span class="btn btn-primary" onclick="showPage('list-property')"><i class="fas fa-upload"></i> List your property</span>
+                        <label for="page-list-property" class="btn btn-primary"><i class="fas fa-upload"></i> List your property</label>
                         <span class="tag"><i class="fas fa-check"></i> free</span>
                     </div>
                 </div>
@@ -186,7 +202,7 @@
                     <h3>I need a place</h3>
                     <p>Search thousands of direct listings. Contact owners directly. No brokers, no commission, no fake listings.</p>
                     <div class="panel-footer">
-                        <span class="btn btn-primary-outline" onclick="showPage('find-space')"><i class="fas fa-search"></i> Search spaces</span>
+                        <label for="page-find-space" class="btn btn-primary-outline"><i class="fas fa-search"></i> Search spaces</label>
                         <span class="tag"><i class="fas fa-shield"></i> secure</span>
                     </div>
                 </div>
@@ -231,7 +247,7 @@
                     No fees, no stress.”
                 </blockquote>
                 <div class="author">
-                    Maria K. <span>— renter in Nairobi</span>
+                    AMIN HUSSEIN <span>— renter in Nairobi</span>
                 </div>
                 <div class="rating">
                     <i class="fas fa-star"></i>
@@ -248,7 +264,7 @@
                     <i class="fas fa-circle-exclamation"></i>
                     <span>Stop paying broker fees. <span class="light">Join the direct rental revolution in Kenya.</span></span>
                 </div>
-                <span class="btn" onclick="showPage('list-property')"><i class="fas fa-arrow-right"></i> Get started</span>
+                <label for="page-list-property" class="btn"><i class="fas fa-arrow-right"></i> Get started</label>
             </div>
 
         </div>
@@ -263,7 +279,6 @@
                 <p>Search thousands of direct listings from verified owners across Nairobi, Mombasa, Kisumu, and beyond.</p>
             </div>
 
-            <!-- Search Filters -->
             <div class="search-filters">
                 <input type="text" placeholder="📍 Location (city, estate)" />
                 <select>
@@ -293,108 +308,111 @@
                 <span class="btn"><i class="fas fa-search"></i> Search</span>
             </div>
 
-            <!-- Property Grid -->
             <div class="property-grid">
-
+                <!-- Property Card 1 -->
                 <div class="property-card">
                     <div class="image">
                         <i class="fas fa-building"></i>
                         <span class="tag"><i class="fas fa-star"></i> Featured</span>
                     </div>
                     <div class="info">
-                        <div class="price"><span class="kes">KES</span> 35,000 <span>/ month</span></div>
-                        <h4>Modern 2BR Apartment</h4>
+                        <div class="price"><span class="kes">KES</span> 25,000 <span>/ month</span></div>
+                        <h4>Modern Apartment</h4>
                         <div class="location"><i class="fas fa-location-dot"></i> Westlands, Nairobi</div>
                         <div class="tags">
                             <span>2 beds</span>
                             <span>1 bath</span>
-                            <span class="verified"><i class="fas fa-check-circle"></i> Verified owner</span>
+                            <span class="verified"><i class="fas fa-check-circle"></i> Verified</span>
                         </div>
                         <span class="btn"><i class="fas fa-message"></i> Contact owner</span>
                     </div>
                 </div>
 
+                <!-- Property Card 2 -->
                 <div class="property-card">
                     <div class="image">
                         <i class="fas fa-house"></i>
                         <span class="tag hot"><i class="fas fa-fire"></i> Hot</span>
                     </div>
                     <div class="info">
-                        <div class="price"><span class="kes">KES</span> 25,000 <span>/ month</span></div>
+                        <div class="price"><span class="kes">KES</span> 15,000 <span>/ month</span></div>
                         <h4>Cozy Studio with Garden</h4>
                         <div class="location"><i class="fas fa-location-dot"></i> Kilimani, Nairobi</div>
                         <div class="tags">
                             <span>Studio</span>
                             <span>1 bath</span>
-                            <span class="verified"><i class="fas fa-check-circle"></i> Verified owner</span>
+                            <span class="verified"><i class="fas fa-check-circle"></i> Verified</span>
                         </div>
                         <span class="btn"><i class="fas fa-message"></i> Contact owner</span>
                     </div>
                 </div>
 
+                <!-- Property Card 3 -->
                 <div class="property-card">
                     <div class="image">
                         <i class="fas fa-building"></i>
                         <span class="tag"><i class="fas fa-star"></i> Featured</span>
                     </div>
                     <div class="info">
-                        <div class="price"><span class="kes">KES</span> 120,000 <span>/ month</span></div>
+                        <div class="price"><span class="kes">KES</span> 100,000 <span>/ month</span></div>
                         <h4>Luxury 3BR Penthouse</h4>
                         <div class="location"><i class="fas fa-location-dot"></i> Nyali, Mombasa</div>
                         <div class="tags">
                             <span>3 beds</span>
                             <span>2 baths</span>
-                            <span class="verified"><i class="fas fa-check-circle"></i> Verified owner</span>
+                            <span class="verified"><i class="fas fa-check-circle"></i> Verified</span>
                         </div>
                         <span class="btn"><i class="fas fa-message"></i> Contact owner</span>
                     </div>
                 </div>
 
+                <!-- Property Card 4 -->
                 <div class="property-card">
                     <div class="image"><i class="fas fa-house"></i></div>
                     <div class="info">
-                        <div class="price"><span class="kes">KES</span> 45,000 <span>/ month</span></div>
+                        <div class="price"><span class="kes">KES</span> 40,000 <span>/ month</span></div>
                         <h4>Family Home with Garden</h4>
                         <div class="location"><i class="fas fa-location-dot"></i> Milimani, Kisumu</div>
                         <div class="tags">
                             <span>3 beds</span>
                             <span>2 baths</span>
-                            <span class="verified"><i class="fas fa-check-circle"></i> Verified owner</span>
+                            <span class="verified"><i class="fas fa-check-circle"></i> Verified</span>
                         </div>
                         <span class="btn"><i class="fas fa-message"></i> Contact owner</span>
                     </div>
                 </div>
 
+                <!-- Property Card 5 -->
                 <div class="property-card">
                     <div class="image"><i class="fas fa-building"></i></div>
                     <div class="info">
-                        <div class="price"><span class="kes">KES</span> 28,000 <span>/ month</span></div>
+                        <div class="price"><span class="kes">KES</span> 25,000 <span>/ month</span></div>
                         <h4>Bright 1BR with Balcony</h4>
                         <div class="location"><i class="fas fa-location-dot"></i> Kileleshwa, Nairobi</div>
                         <div class="tags">
                             <span>1 bed</span>
                             <span>1 bath</span>
-                            <span class="verified"><i class="fas fa-check-circle"></i> Verified owner</span>
+                            <span class="verified"><i class="fas fa-check-circle"></i> Verified</span>
                         </div>
                         <span class="btn"><i class="fas fa-message"></i> Contact owner</span>
                     </div>
                 </div>
 
+                <!-- Property Card 6 -->
                 <div class="property-card">
                     <div class="image"><i class="fas fa-building"></i></div>
                     <div class="info">
-                        <div class="price"><span class="kes">KES</span> 55,000 <span>/ month</span></div>
+                        <div class="price"><span class="kes">KES</span> 50,000 <span>/ month</span></div>
                         <h4>Designer 2BR Loft</h4>
                         <div class="location"><i class="fas fa-location-dot"></i> Riverside, Nairobi</div>
                         <div class="tags">
                             <span>2 beds</span>
                             <span>2 baths</span>
-                            <span class="verified"><i class="fas fa-check-circle"></i> Verified owner</span>
+                            <span class="verified"><i class="fas fa-check-circle"></i> Verified</span>
                         </div>
                         <span class="btn"><i class="fas fa-message"></i> Contact owner</span>
                     </div>
                 </div>
-
             </div>
 
         </div>
@@ -406,10 +424,10 @@
 
             <div class="page-title">
                 <h1><i class="fas fa-plus-circle"></i> List your property in Kenya</h1>
-                <p>List your space in 2 minutes — completely free. No broker fees, no hidden costs.</p>
+                <p>List your space in 2 minutes completely free. No broker fees, no hidden costs.</p>
             </div>
 
-            <form class="listing-form" onsubmit="return false;">
+            <form class="listing-form">
                 <div class="form-row">
                     <div class="form-group">
                         <label>Property title <span class="required">*</span></label>
@@ -484,8 +502,8 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> List your property — Free</button>
-                <div class="form-hint" style="text-align:center; margin-top:12px;">
-                    <i class="fas fa-check-circle" style="color:var(--green);"></i> No commission · No hidden fees · 100% free
+                <div class="form-hint form-hint-center">
+                    <i class="fas fa-check-circle"></i> No commission · No hidden fees · 100% free
                 </div>
             </form>
 
@@ -524,11 +542,11 @@
                 </div>
             </div>
 
-            <div style="background:var(--white); border-radius:var(--radius); padding:24px 28px; margin-bottom:30px; box-shadow:var(--shadow-sm); border:1px solid rgba(0,0,0,0.04); text-align:center;">
-                <h3 style="margin-bottom:6px;">Ready to get started in Kenya?</h3>
-                <p style="color:var(--gray-500); margin-bottom:14px;">Join thousands of happy renters and owners who cut out the middleman.</p>
-                <span class="btn btn-primary" onclick="showPage('list-property')"><i class="fas fa-plus-circle"></i> List your property for free</span>
-                <span class="btn btn-primary-outline" onclick="showPage('find-space')" style="margin-left:10px;"><i class="fas fa-search"></i> Find a space</span>
+            <div class="cta-box">
+                <h3>Ready to get started in Kenya?</h3>
+                <p>Join thousands of happy renters and owners who cut out the middleman.</p>
+                <label for="page-list-property" class="btn btn-primary"><i class="fas fa-plus-circle"></i> List your property for free</label>
+                <label for="page-find-space" class="btn btn-primary-outline"><i class="fas fa-search"></i> Find a space</label>
             </div>
 
         </div>
@@ -589,9 +607,9 @@
                 </ul>
             </div>
 
-            <div style="background:var(--primary-light); border-radius:var(--radius); padding:20px 24px; margin-bottom:30px; border-left:5px solid var(--primary);">
-                <p style="font-weight:600; color:var(--dark); font-size:14px;">
-                    <i class="fas fa-shield" style="color:var(--primary);"></i> 
+            <div class="safety-banner">
+                <p>
+                    <i class="fas fa-shield"></i> 
                     RentDirect Kenya is 100% broker-free. We don't charge fees, we don't handle payments, and we never share your data.
                 </p>
             </div>
@@ -603,121 +621,26 @@
         ========================================================== -->
         <footer class="footer">
             <div class="copy">
-                <i class="fas fa-building"></i> RentDirect Kenya · 2026 · no brokers
-                <span class="kenya-flag"></span>
+                <i class="fas fa-building"></i> RentDirect · 2026 · no brokers
+                
             </div>
             <div class="footer-links">
-                <a href="#" onclick="showPage('home')">Home</a>
-                <a href="#" onclick="showPage('safety')">Safety</a>
+                <label for="page-home">Home</label>
+                <label for="page-safety">Safety</label>
                 <a href="#">Blog</a>
                 <a href="#">Contact</a>
-                <a href="#" onclick="showPage('safety')"><i class="fas fa-shield"></i> Trust</a>
+                <label for="page-safety"><i class="fas fa-shield"></i> Trust</label>
             </div>
             <div class="social-links">
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
         </footer>
 
     </div>
-
-    <!-- ==========================================================
-    JAVASCRIPT
-    ========================================================== -->
-    <script>
-        // ============================================================
-        // PAGE NAVIGATION
-        // ============================================================
-
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(function(p) {
-                p.classList.remove('active');
-            });
-
-            var targetPage = document.getElementById('page-' + pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
-
-            document.querySelectorAll('.nav-links a').forEach(function(link) {
-                link.classList.remove('active');
-                if (link.dataset.page === pageId) {
-                    link.classList.add('active');
-                }
-            });
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // ============================================================
-        // SIGN IN MODAL
-        // ============================================================
-
-        function openModal() {
-            var modal = document.getElementById('signinModal');
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            var modal = document.getElementById('signinModal');
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function handleSignIn(event) {
-            event.preventDefault();
-            alert('✅ Sign in successful! Welcome back to RentDirect Kenya.');
-            closeModal();
-        }
-
-        // ============================================================
-        // CLOSE MODAL ON CLICK OUTSIDE
-        // ============================================================
-
-        document.getElementById('signinModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // ============================================================
-        // CLOSE MODAL WITH ESCAPE KEY
-        // ============================================================
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                var modal = document.getElementById('signinModal');
-                if (modal.classList.contains('active')) {
-                    closeModal();
-                }
-            }
-        });
-
-        // ============================================================
-        // NAV LINK CLICK HANDLERS
-        // ============================================================
-
-        document.querySelectorAll('.nav-links a').forEach(function(link) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                var page = this.dataset.page;
-                if (page) {
-                    showPage(page);
-                }
-            });
-        });
-
-        // ============================================================
-        // LOGO CLICK
-        // ============================================================
-
-        document.querySelector('.logo').addEventListener('click', function() {
-            showPage('home');
-        });
-    </script>
 
 </body>
 </html>
